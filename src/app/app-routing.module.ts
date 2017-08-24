@@ -1,21 +1,25 @@
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
+import { fallbackRoute } from './fallback-route';
+import { LayoutComponent } from './layout/layout.component';
+import { MapComponent } from './pages/map/map.component';
+import { AuthGuard } from './shared/services/auth.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 
 const routes: Routes = [
   {
     path: '',
-    children: []
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'map', component: MapComponent, canActivate: [AuthGuard] }
+    ]
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  }
+  { path: 'login', component: LoginComponent },
+  fallbackRoute
 ];
 
 @NgModule({
