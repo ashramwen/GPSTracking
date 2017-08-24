@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+$assets-root: 'assets/';
+$images-root: $assets-root + 'img/';
+$fonts-root: $assets-root + 'fonts/';
+$fa-font-path: $fonts-root + 'font-awesome';
+
+@import "theme/sb-admin";
+@import "~font-awesome/scss/font-awesome";
